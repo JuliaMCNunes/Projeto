@@ -8,8 +8,16 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'listar-contatos',
     pathMatch: 'full'
+  },
+  {
+    path: 'listar-contatos',
+    loadChildren: () => import('./pages/listar-contatos/listar-contatos.module').then( m => m.ListarContatosPageModule)
+  },
+  {
+    path: 'detalhes-contatos/:id',
+    loadChildren: () => import('./pages/detalhes-contatos/detalhes-contatos.module').then( m => m.DetalhesContatosPageModule)
   },
 ];
 

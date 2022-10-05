@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-title>Contatos</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> 
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" edge="true">
+    <ion-fab-button routerLink="/detalhes-contatos/-1">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-list>
+    <ion-item *ngFor="let dadosContatos of dadosContatos" routerLink="/detalhes-contatos/{{dadosContatos.id}}">
+      <ion-avatar slot="start">
+        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <ion-label>{{dadosContatos.nome}} {{dadosContatos.sobrenome}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons>
+      <ion-back-button Href=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Contato</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed" edge="true">
+    <ion-fab-button color="danger" (click)="showConfirm()">
+      <ion-icon name="trash"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-item *ngIf="!modoEdicao">{{contatoSelecionado.nome}} {{contatoSelecionado.sobrenome}}</ion-item>
+  <ion-item *ngIf="!modoEdicao">{{contatoSelecionado.tiponum}}: {{contatoSelecionado.num}}</ion-item>
+  <ion-item *ngIf="!modoEdicao">{{contatoSelecionado.email}}</ion-item>
+
+  <ion-button *ngIf="!modoEdicao" (click)="iniciarEdicao()">Editar</ion-button>
+
+  <form *ngIf="modoEdicao" #veri="ngForm" [formGroup]="contatoForm">
+    
+    <ion-item>
+      <ion-label position="floating">Nome:</ion-label>
+      <small *ngIf="(contatoForm.get('nome').errors?.required || contatoForm.get('nome').errors?.minlength || contatoForm.get('nome').errors?.maxlength || contatoForm.get('nome').errors?.pattern) && veri.submitted">Permitido de 3 a 15 caracteres.</small>
+      <ion-input [(ngModel)]="contatoSelecionado.nome" formControlName="nome" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Sobrenome:</ion-label>
+      <small *ngIf="(contatoForm.get('sobrenome').errors?.minlength || contatoForm.get('sobrenome').errors?.maxlength || contatoForm.get('sobrenome').errors?.pattern) && veri.submitted">Permitido de 2 a 15 caracteres.</small>
+      <ion-input [(ngModel)]="contatoSelecionado.sobrenome" formControlName="sobrenome" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Número:</ion-label>
+      <small *ngIf="(contatoForm.get('num').errors?.required || contatoForm.get('num').errors?.minlength || contatoForm.get('num').errors?.maxlength) && veri.submitted">Necessário número válido.</small>
+      <ion-input [(ngModel)]="contatoSelecionado.num" formControlName="num" simpleMask="(999) 99999-9999"></ion-input>
+    </ion-item>
+
+    <ion-list>
+      <ion-radio-group [(ngModel)]="contatoSelecionado.tiponum" formControlName="tiponum" type="text">
+        <ion-list-header>
+          <ion-label>Tipo do número:</ion-label>
+        </ion-list-header>
+        <small *ngIf="(contatoForm.get('tiponum').errors?.required) && veri.submitted">Campo obrigatório.</small>
+    
+        <ion-item>
+          <ion-label>Celular</ion-label>
+          <ion-radio slot="start" value="Celular"></ion-radio>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label>Casa</ion-label>
+          <ion-radio slot="start" value="Casa"></ion-radio>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label>Trabalho</ion-label>
+          <ion-radio slot="start" value="Trabalho"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-item>
+      <ion-label position="floating">Email:</ion-label>
+      <small *ngIf="(contatoForm.get('email').errors?.email) && veri.submitted">Necessário email válido.</small>
+      <ion-input [(ngModel)]="contatoSelecionado.email" formControlName="email" type="email"></ion-input>
+    </ion-item>
+
+    <ion-button (click)="encerrarEdicao()" type="submit" [disabled]="!contatoForm.valid" routerLink="/listar-contatos/">Salvar</ion-button>
+  </form>
+  
+</ion-content>
