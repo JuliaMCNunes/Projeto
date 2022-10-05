@@ -13,7 +13,7 @@
 <ion-content>
 
   <ion-fab vertical="top" horizontal="end" slot="fixed" edge="true">
-    <ion-fab-button color="danger" (click)="showConfirm()">
+    <ion-fab-button *ngIf="!modoEdicao" color="danger" (click)="showConfirm()">
       <ion-icon name="trash"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -22,7 +22,11 @@
   <ion-item *ngIf="!modoEdicao">{{contatoSelecionado.tiponum}}: {{contatoSelecionado.num}}</ion-item>
   <ion-item *ngIf="!modoEdicao">{{contatoSelecionado.email}}</ion-item>
 
-  <ion-button *ngIf="!modoEdicao" (click)="iniciarEdicao()">Editar</ion-button>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" edge="true" *ngIf="!modoEdicao" (click)="iniciarEdicao()">
+    <ion-fab-button>
+      <ion-icon name="pencil-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
   <form *ngIf="modoEdicao" #veri="ngForm" [formGroup]="contatoForm">
     
@@ -78,3 +82,9 @@
   </form>
   
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-footer>

@@ -77,10 +77,4 @@ export class DetalhesContatosPage implements OnInit {
       })
   }
 
-  // submit(){
-  //   if(this.contatoForm.invalid || this.contatoForm.pending){
-  //     return}
-  //   else{}
-  // }
-
 }
